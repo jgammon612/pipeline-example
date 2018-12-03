@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: BuildConfig
 metadata:
-  name: myfirstpipeline
+  name: myscorecardpipeline
   labels:
-    name: myfirstpipeline
+    name: myscorecardpipeline
   annotations:
-    pipeline.alpha.openshift.io/uses: '[{"name": "myphp", "namespace": "", "kind": "DeploymentConfig"}]'
+    pipeline.alpha.openshift.io/uses: '[{"name": "pythonscorecard", "namespace": "", "kind": "DeploymentConfig"}]'
 spec:
   triggers:
     -
@@ -22,7 +22,7 @@ spec:
   strategy:
     type: JenkinsPipeline
     jenkinsPipelineStrategy:
-      jenkinsfile: "node() {\nstage 'build'\nopenshiftBuild(buildConfig: 'myphp', showBuildLogs: 'true')\nstage 'deploy'\nopenshiftDeploy(deploymentConfig: 'myphp')\nopenshiftScale(deploymentConfig: 'myphp',replicaCount: '2')\n}"
+      jenkinsfile: "node() {\nstage 'build'\nopenshiftBuild(buildConfig: 'pythonscorecard', showBuildLogs: 'true')\nstage 'deploy'\nopenshiftDeploy(deploymentConfig: 'pythonscorecard')\nopenshiftScale(deploymentConfig: 'pythonscorecard',replicaCount: '2')\n}"
   output:
   resources:
   postCommit:
