@@ -1,11 +1,11 @@
 node('') {
 stage 'buildInDevelopment'
-openshiftBuild(namespace: 'development', buildConfig: 'myapp', showBuildLogs: 'true')
+openshiftBuild(namespace: 'dev', buildConfig: 'pythonscorecard', showBuildLogs: 'true')
 stage 'deployInDevelopment'
-openshiftDeploy(namespace: 'development', deploymentConfig: 'myapp')
-openshiftScale(namespace: 'development', deploymentConfig: 'myapp',replicaCount: '2')
+openshiftDeploy(namespace: 'dev', deploymentConfig: 'pythonscorecard')
+openshiftScale(namespace: 'dev', deploymentConfig: 'pythonscorecard',replicaCount: '2')
 stage 'deployInTesting'
-openshiftTag(namespace: 'development', sourceStream: 'myapp',  sourceTag: 'latest', destinationStream: 'myapp', destinationTag: 'promoteToQA')
-openshiftDeploy(namespace: 'testing', deploymentConfig: 'myapp', )
-openshiftScale(namespace: 'testing', deploymentConfig: 'myapp',replicaCount: '3')
+openshiftTag(namespace: 'dev', sourceStream: 'pythonscorecard',  sourceTag: 'latest', destinationStream: 'pythonscorecard', destinationTag: 'promoteToQA')
+openshiftDeploy(namespace: 'qa', deploymentConfig: 'pythonscorecard', )
+openshiftScale(namespace: 'qa', deploymentConfig: 'pythonscorecard',replicaCount: '3')
 }
